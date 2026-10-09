@@ -10,9 +10,10 @@ const DINOS = [
     { emoji: "🌋", name: "Vulcano" },
     { emoji: "🍃", name: "Folhasso" },
     { emoji: "⚡", name: "Rapto" },
+    { emoji: "🐢", name: "Tarta"},
 ];
 
-const PRIZE_LIMIT = 500;
+const PRIZE_LIMIT = 1000;
 let totalArrecadado = 0;
 let totalPremios = 0;
 let selectedDino = null;
@@ -74,7 +75,7 @@ function apostar() {
     updateStats();
     const sorteado = Math.floor(Math.random() * DINOS.length);
     const premio = valor * 2;
-    const limitePermitido = totalArrecadado * 0.20; // regra de rentabilidade
+    const limitePermitido = totalArrecadado * 1; // regra de rentabilidade
     document.getElementById('jackpot-area').innerHTML = '';
     const acertou = selectedDino === sorteado;
     if (acertou && !freeRound) {
@@ -88,18 +89,6 @@ function apostar() {
     'lose'
     );
     updateStats();
-    return;
-    }
-    // Verificação: regra de rentabilidade (20% do arrecadado)
-    if (premio > limitePermitido) {
-    // A máquina "nega" o acerto
-    const novoSorteado = (sorteado + 1 + Math.floor(Math.random() * 8)) %
-    DINOS.length;
-    showResult(
-    `🎲 Ops! Erro técnico na máquina... tente novamente! (O dino sorteado
-    foi ${DINOS[novoSorteado].emoji})`,
-    'info'
-    );
     return;
     }
     // Pagamento legítimo
